@@ -1,0 +1,23 @@
+[Unit]
+Description=Scalable E-Commerce Node.js Backend
+After=network.target mongodb.service
+
+[Service]
+Type=simple
+# Update User to your Ubuntu/WSL username (e.g., ubuntu)
+User=ubuntu
+# Update WorkingDirectory and ExecStart to the correct path
+WorkingDirectory=/home/ubuntu/ecommerce-backend
+ExecStart=/usr/bin/node /home/ubuntu/ecommerce-backend/server.js
+
+Restart=on-failure
+RestartSec=5
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=PORT=5000
+Environment=MONGODB_URI=mongodb://127.0.0.1:27017/ecommerce
+Environment=JWT_SECRET=supersecretjwtkey_replace_me_in_prod
+
+[Install]
+WantedBy=multi-user.target
